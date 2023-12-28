@@ -13,7 +13,5 @@ RUN npm install
 # inside our image in the folder `/app`
 COPY . /app
 
-RUN npm run build
-
 # Start the app
 ENTRYPOINT ["npm", "start"]

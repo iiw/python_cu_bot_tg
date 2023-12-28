@@ -11,10 +11,4 @@ services:
     env_file: .env
     environment:
       - TG_TOKEN=$TG_TOKEN
-      - TG_PORT=$TG_PORT
-      - TG_DOMAIN=$TG_DOMAIN
-    ports:
-      - "80:$TG_PORT"
-      - "3000:3000"
-      - "$TG_PORT:$TG_PORT"
     command: npm build; npm start
