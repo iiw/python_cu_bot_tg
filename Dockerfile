@@ -1,4 +1,7 @@
-FROM node:20.10-alpine
+FROM node:20.10
+
+RUN apt-get update
+RUN apt-get install -y python3
 
 WORKDIR /app
 
