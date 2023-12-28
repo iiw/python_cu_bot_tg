@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs:20.10-alpine
+    container_name: nodejs
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - TG_TOKEN=$TG_TOKEN
+      - TG_PORT=$TG_PORT
+      - TG_DOMAIN=$TG_DOMAIN
+    ports:
+      - "80:$TG_PORT"
+      - "3000:3000"
+      - "$TG_PORT:$TG_PORT"
+    command: npm run dev
