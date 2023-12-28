@@ -17,4 +17,4 @@ services:
       - "80:$TG_PORT"
       - "3000:3000"
       - "$TG_PORT:$TG_PORT"
-    command: npm run dev
+    command: npm build; npm start
