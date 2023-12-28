@@ -14,7 +14,7 @@ bot.help((ctx) => ctx.reply("Send me a sticker"));
 bot.on(message("sticker"), (ctx) => ctx.reply("👍"));
 bot.on(message("text"), async (ctx) => {
   let isMention = false;
-  if (ctx.chat.type === "group") {
+  if (ctx.chat.type === "group" || ctx.chat.type === "supergroup") {
     isMention =
       ctx.message?.entities?.find((e) => e.type === "mention") !== undefined;
   } else {
@@ -25,6 +25,8 @@ bot.on(message("text"), async (ctx) => {
       (e) => e.type === "pre"
     ) as MessageEntity.PreMessageEntity;
   const isPython = entity?.language === "python";
+
+  console.log(ctx.message);
 
   const code = ctx.message.text.replace("@python_cu_bot", "");
 
