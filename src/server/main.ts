@@ -40,20 +40,21 @@ bot.on(message("text"), async (ctx) => {
     await new Promise((resolve) => {
       python3.stdout.on("data", (data: any) => {
         results.push(data.toString());
-        console.log(data.toString());
       });
       python3.stderr.on("data", (data: any) => {
         results.push(data.toString());
-        console.log(data.toString());
         resolve(1);
       });
       python3.on("close", () => {
-        console.log("close");
         resolve(1);
       });
     });
     await fs.unlink(filename);
-    ctx.reply(`The work is done!\n\n${results.join("\n")}`);
+    ctx.replyWithHTML(
+      `<i>The work is done, ${ctx.from.first_name}!</i>\n\n<pre>${results.join(
+        "\n"
+      )}</pre>`
+    );
   } else if (isMention) {
     ctx.reply("Sorry, I'm machine learning engineer. I code Python!");
   } else {
