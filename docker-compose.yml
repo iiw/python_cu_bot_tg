@@ -12,3 +12,9 @@ services:
     environment:
       - TG_TOKEN=$TG_TOKEN
     command: npm build; npm start
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

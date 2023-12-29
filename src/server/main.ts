@@ -4,6 +4,7 @@ import { message } from "telegraf/filters";
 import { spawnSync } from "child_process";
 const fs = require("node:fs/promises");
 var crypto = require("crypto");
+const express = require("express");
 
 dotenv.config();
 
@@ -54,3 +55,16 @@ bot.launch();
 // Enable graceful stop
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));
+
+// health check
+const app = express();
+const port = 8080;
+
+app.get("/", (req: any, res: any) => {
+  console.log("Healthcheck");
+  res.send("I'm alive!");
+});
+
+app.listen(8080, () => {
+  console.log(`Healthcheck are listening the port ${port}`);
+});
