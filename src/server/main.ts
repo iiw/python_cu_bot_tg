@@ -21,7 +21,8 @@ bot.on(message("text"), async (ctx) => {
       isMention = ctx.chat.type === "private";
     }
 
-    const code = ctx.message.text.replace("@python_cu_bot", "");
+    let code = ctx.message.text.replace("@python_cu_bot ", "");
+    code = code.replace(/\xA0/g, " ");
 
     if (isMention) {
       const name = crypto.randomBytes(20).toString("hex");
